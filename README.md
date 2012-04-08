@@ -16,6 +16,8 @@ Details of problem sets can be found here: http://code.google.com/codejam/contes
 
 Contact Me
 ----------
-* Twitter handle: @anuragkapur
+* Twitter handle:[@anuragkapur][twitterlink]
 * LinkedIn: http://www.linkedin.com/in/anuragkapur
 * Email: anuragkapur@gmail.com
+
+[twitterlink]: http://twitter.com/anuragkapur
