@@ -10,17 +10,17 @@ Repository Structure
 The top level package is com.anuragkapur
 There will be subpackages in the top level package for solutions to problems sets of different years.
 
-Solutions to the Code jam 2014 event for example can be found here: https://github.com/anuragkapur/Google-Code-Jam/tree/master/src/com/anuragkapur/gcj2014
+Solutions to the Code jam 2014 event for example can be found here:
+[https://github.com/anuragkapur/Google-Code-Jam/tree/master/src/main/java/com/anuragkapur/gcj2014](https://github.com/anuragkapur/Google-Code-Jam/tree/master/src/main/java/com/anuragkapur/gcj2014)
 
 Problem Set References
 ----------------------
-Details of problem sets can be found here: http://code.google.com/codejam/contests.html
+Details of problem sets can be found here: [http://code.google.com/codejam/contests.html](http://code.google.com/codejam/contests.html)
 
 Contact Me
 ----------
 * Twitter handle:[@anuragkapur][twitterlink]
-* LinkedIn: http://www.linkedin.com/in/anuragkapur
-* Email: anuragkapur@gmail.com
+* LinkedIn: [http://www.linkedin.com/in/anuragkapur](http://www.linkedin.com/in/anuragkapur)
 
 Disclaimer
 ----------
