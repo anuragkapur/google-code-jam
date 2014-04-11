@@ -3,14 +3,14 @@ GOOGLE CODE JAM - SOLUTIONS
 
 Programming Language
 --------------------
-Java 1.6
+Java
 
 Repository Structure
 --------------------
 The top level package is com.anuragkapur
-There will be subpackages in the top level package for solutions to probelms sets of different years.
+There will be subpackages in the top level package for solutions to problems sets of different years.
 
-Solutions to the Code jam Africa 2010 event for example can be found here: https://github.com/anuragkapur/Google-Code-Jam/tree/master/src/com/anuragkapur/africa2010
+Solutions to the Code jam 2014 event for example can be found here: https://github.com/anuragkapur/Google-Code-Jam/tree/master/src/com/anuragkapur/gcj2014
 
 Problem Set References
 ----------------------
