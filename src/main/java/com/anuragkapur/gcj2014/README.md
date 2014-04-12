@@ -2,6 +2,7 @@ Google Code Jam 2014 - Qualification Round
 ==========================================
 
 Source: [https://code.google.com/codejam/contest/2974486/dashboard](https://code.google.com/codejam/contest/2974486/dashboard)
+
 © 2008-2013 Google
 
 ###Problem A: Magic Trick
