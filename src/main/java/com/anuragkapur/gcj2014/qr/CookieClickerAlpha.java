@@ -19,8 +19,8 @@ import java.nio.file.Paths;
 
 public class CookieClickerAlpha {
 
-    private static String inputFileName = "gcj2014_qr_cookieclickeralpha_small.in";
-    private static String outputFileName = "src/main/resources/gcj2014_qr_cookieclickeralpha_small.out";
+    private static String inputFileName = "gcj2014_qr_cookieclickeralpha_large.in";
+    private static String outputFileName = "src/main/resources/gcj2014_qr_cookieclickeralpha_large.out";
     private static ClassLoader classLoader;
 
     static {
