@@ -4,6 +4,8 @@ import com.sun.tools.javac.util.Assert;
 
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
@@ -15,14 +17,40 @@ import java.nio.file.Paths;
  * @since: 12/04/2014
  */
 
-public class CookieClicketAlpha {
+public class CookieClickerAlpha {
 
-    private static String inputFileName = "template.in";
-    private static String outputFileName = "src/main/resources/template.out";
+    private static String inputFileName = "gcj2014_qr_cookieclickeralpha_small.in";
+    private static String outputFileName = "src/main/resources/gcj2014_qr_cookieclickeralpha_small.out";
     private static ClassLoader classLoader;
 
     static {
-        classLoader = CookieClicketAlpha.class.getClassLoader();
+        classLoader = CookieClickerAlpha.class.getClassLoader();
+    }
+
+    private static String compute(double c, double f, double x) {
+
+        double rateOfProduction = 2;
+        double t1;
+        double t2;
+        double time = 0;
+
+        while (true) {
+            t1 = x / rateOfProduction;
+            t2 = (c / rateOfProduction) + (x / (rateOfProduction + f));
+
+            if (t2 < t1) {
+                time += c / rateOfProduction;
+                rateOfProduction += f;
+            } else {
+                time += t1;
+                break;
+            }
+        }
+
+        BigDecimal answerDecimal = new BigDecimal(time);
+        answerDecimal = answerDecimal.setScale(7, RoundingMode.HALF_UP);
+
+        return answerDecimal.toString();
     }
 
     private static void writeOutputToFile(String str) {
@@ -42,9 +70,6 @@ public class CookieClicketAlpha {
             // String buffer for storing the output
             StringBuilder output = new StringBuilder();
 
-            // Instantiate object to use non static methods
-
-
             // read and parse input file
             URL fileUrl = classLoader.getResource(inputFileName);
             if (fileUrl == null) {
@@ -60,18 +85,18 @@ public class CookieClicketAlpha {
             int activeTestCaseNumber = 0;
             while ((strLine = reader.readLine()) != null) {
 
-                System.out.println(strLine);
-
                 if (lineNumber == 0) {
                     noOfTestCases = Integer.parseInt(strLine);
                 } else {
-                    noOfTestCases ++;
                     activeTestCaseNumber ++;
-                    // Now that a test case has been parsed, compute output for
-                    // this test case
+
+                    String tokens[] = strLine.split("\\s");
+                    double c = Double.parseDouble(tokens[0]);
+                    double f = Double.parseDouble(tokens[1]);
+                    double x = Double.parseDouble(tokens[2]);
 
                     // Invoke algorithm here
-                    String solutionToTestCase = "";
+                    String solutionToTestCase = compute(c, f, x);
 
                     // Prepare output string
                     System.out.println(solutionToTestCase);
