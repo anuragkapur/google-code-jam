@@ -11,7 +11,7 @@ The top level package is com.anuragkapur
 There will be subpackages in the top level package for solutions to problems sets of different years.
 
 Solutions to the Code jam 2014 event for example can be found here:
-[src/main/java/com/anuragkapur/gcj2014](src/main/java/com/anuragkapur/gcj2014/README.md)
+[src/main/java/com/anuragkapur/gcj2014](src/main/java/com/anuragkapur/gcj2014)
 
 Problem Set References
 ----------------------
