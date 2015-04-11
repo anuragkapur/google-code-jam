@@ -11,6 +11,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * @author anuragkapur
@@ -18,8 +19,8 @@ import java.util.List;
 public class InfiniteHouseOfPancakes {
 
 
-    private static String inputFileName = "template.in";
-    private static String outputFileName = "src/main/resources/template.out";
+    private static String inputFileName = "B-small-attempt0.in";
+    private static String outputFileName = "src/main/resources/B-small-attempt0.out";
     private static ClassLoader classLoader;
 
     static {
@@ -59,11 +60,7 @@ public class InfiniteHouseOfPancakes {
     }
 
     private List<Integer> createCopyOfList(List<Integer> list) {
-        List<Integer> copy = new ArrayList<>();
-        for (int num : list) {
-            copy.add(num);
-        }
-        return copy;
+        return list.stream().collect(Collectors.toList());
     }
 
     private int getIndexOfMaxInList(List<Integer> list) {
@@ -141,10 +138,12 @@ public class InfiniteHouseOfPancakes {
 
                         // Invoke algorithm here
                         List<Integer> pancakesOnPlates = houseOfPancakes.getListFromPString(pString);
+                        System.out.println(pString);
                         String solutionToTestCase = String.valueOf(houseOfPancakes.solution(d, pancakesOnPlates));
 
                         // Prepare output string
-                        //System.out.println(solutionToTestCase);
+                        System.out.println("Min :: " + solutionToTestCase);
+                        System.out.println("");
                         output.append("Case #").append(activeTestCaseNumber).append(": ").append(solutionToTestCase);
                         output.append("\n");
                     }
