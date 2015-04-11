@@ -19,8 +19,8 @@ import java.util.stream.Collectors;
 public class InfiniteHouseOfPancakes {
 
 
-    private static String inputFileName = "B-small-attempt0.in";
-    private static String outputFileName = "src/main/resources/B-small-attempt0.out";
+    private static String inputFileName = "B-small-attempt1.in";
+    private static String outputFileName = "src/main/resources/B-small-attempt1.out";
     private static ClassLoader classLoader;
 
     static {
@@ -32,12 +32,13 @@ public class InfiniteHouseOfPancakes {
         // recursion base case
         int maxPlateIndex = getIndexOfMaxInList(pancakesOnPlates);
         int pancakes = pancakesOnPlates.get(maxPlateIndex);
-        if(pancakes == 1 || pancakes == 0) {
+        if(pancakes <= 2) {
             return pancakes;
         }
 
-        // split the max
         List<Integer> copy = createCopyOfList(pancakesOnPlates);
+
+        // split the max
         maxPlateIndex = getIndexOfMaxInList(pancakesOnPlates);
         pancakes = pancakesOnPlates.get(maxPlateIndex);
         if (pancakes % 2 == 0) {
@@ -68,6 +69,7 @@ public class InfiniteHouseOfPancakes {
         int maxIndex = 0;
         for (int i=1; i<list.size(); i++) {
             if (list.get(i) > currentMax) {
+                currentMax = list.get(i);
                 maxIndex = i;
             }
         }
