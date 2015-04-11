@@ -9,6 +9,8 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author anuragkapur
@@ -22,6 +24,66 @@ public class InfiniteHouseOfPancakes {
 
     static {
         classLoader = InfiniteHouseOfPancakes.class.getClassLoader();
+    }
+
+    private int solution(int d, List<Integer> pancakesOnPlates) {
+
+        // recursion base case
+        int maxPlateIndex = getIndexOfMaxInList(pancakesOnPlates);
+        int pancakes = pancakesOnPlates.get(maxPlateIndex);
+        if(pancakes == 1 || pancakes == 0) {
+            return pancakes;
+        }
+
+        // split the max
+        List<Integer> copy = createCopyOfList(pancakesOnPlates);
+        maxPlateIndex = getIndexOfMaxInList(pancakesOnPlates);
+        pancakes = pancakesOnPlates.get(maxPlateIndex);
+        if (pancakes % 2 == 0) {
+            pancakesOnPlates.set(maxPlateIndex, pancakes / 2);
+            pancakesOnPlates.add(pancakes / 2);
+        } else {
+            pancakesOnPlates.set(maxPlateIndex, (pancakes / 2) + 1);
+            pancakesOnPlates.add(pancakes / 2);
+        }
+        int possibility1 = solution(d, pancakesOnPlates) + 1;
+
+        // take one off everything
+        for (int i=0; i<copy.size(); i++) {
+            pancakes = copy.get(i);
+            copy.set(i, pancakes-1);
+        }
+        int possibility2 = solution(d, copy) + 1;
+
+        return (possibility1 < possibility2) ? possibility1 : possibility2;
+    }
+
+    private List<Integer> createCopyOfList(List<Integer> list) {
+        List<Integer> copy = new ArrayList<>();
+        for (int num : list) {
+            copy.add(num);
+        }
+        return copy;
+    }
+
+    private int getIndexOfMaxInList(List<Integer> list) {
+        int currentMax = list.get(0);
+        int maxIndex = 0;
+        for (int i=1; i<list.size(); i++) {
+            if (list.get(i) > currentMax) {
+                maxIndex = i;
+            }
+        }
+        return maxIndex;
+    }
+
+    private List<Integer> getListFromPString(String pString) {
+        List<Integer> list = new ArrayList<>();
+        String tokens[] = pString.split("\\s");
+        for (String token : tokens) {
+            list.add(Integer.parseInt(token));
+        }
+        return list;
     }
 
     private static void writeOutputToFile(String str) {
@@ -57,33 +119,35 @@ public class InfiniteHouseOfPancakes {
             int lineNumber = 0;
             int noOfTestCases = -1;
             int activeTestCaseNumber = 0;
+            int d = -1;
+            String pString = null;
+
             while ((strLine = reader.readLine()) != null) {
 
-                System.out.println(strLine);
+                //System.out.println(strLine);
 
                 if (lineNumber == 0) {
                     noOfTestCases = Integer.parseInt(strLine);
                 } else {
-                    noOfTestCases ++;
-                    activeTestCaseNumber ++;
-                    int d = -1;
-                    String pString = null;
-                    if (lineNumber % 2 == 0) {
-                        pString = strLine;
-                    } else {
+                    if (lineNumber % 2 != 0) {
                         d = Integer.parseInt(strLine);
+                    } else {
+                        noOfTestCases ++;
+                        activeTestCaseNumber ++;
+
+                        pString = strLine;
+                        // Now that a test case has been parsed, compute output for
+                        // this test case
+
+                        // Invoke algorithm here
+                        List<Integer> pancakesOnPlates = houseOfPancakes.getListFromPString(pString);
+                        String solutionToTestCase = String.valueOf(houseOfPancakes.solution(d, pancakesOnPlates));
+
+                        // Prepare output string
+                        //System.out.println(solutionToTestCase);
+                        output.append("Case #").append(activeTestCaseNumber).append(": ").append(solutionToTestCase);
+                        output.append("\n");
                     }
-
-                    // Now that a test case has been parsed, compute output for
-                    // this test case
-
-                    // Invoke algorithm here
-                    String solutionToTestCase = solution(d, pString);
-
-                    // Prepare output string
-                    System.out.println(solutionToTestCase);
-                    output.append("Case #").append(activeTestCaseNumber).append(": ").append(solutionToTestCase);
-                    output.append("\n");
                 }
                 lineNumber++;
             }
@@ -94,10 +158,5 @@ public class InfiniteHouseOfPancakes {
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }
-
-    private static String solution(int d, String pString) {
-        System.out.println("d :: " + d + " pString :: " + pString);
-        return null;
     }
 }
