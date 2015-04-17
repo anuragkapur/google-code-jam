@@ -9,8 +9,7 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
@@ -19,9 +18,11 @@ import java.util.stream.Collectors;
 public class InfiniteHouseOfPancakes {
 
 
-    private static String inputFileName = "B-small-attempt1.in";
-    private static String outputFileName = "src/main/resources/B-small-attempt1.out";
+    private static String inputFileName = "B-large.in";
+    private static String outputFileName = "src/main/resources/B-large.out";
     private static ClassLoader classLoader;
+
+    Map<String, Integer> map = new HashMap<>();
 
     static {
         classLoader = InfiniteHouseOfPancakes.class.getClassLoader();
@@ -44,6 +45,10 @@ public class InfiniteHouseOfPancakes {
         if (pancakes % 2 == 0) {
             pancakesOnPlates.set(maxPlateIndex, pancakes / 2);
             pancakesOnPlates.add(pancakes / 2);
+        } else if (pancakes % 3 == 0) {
+            int split = pancakes / 3;
+            pancakesOnPlates.set(maxPlateIndex, split);
+            pancakesOnPlates.add(pancakes - split);
         } else {
             pancakesOnPlates.set(maxPlateIndex, (pancakes / 2) + 1);
             pancakesOnPlates.add(pancakes / 2);
@@ -61,7 +66,11 @@ public class InfiniteHouseOfPancakes {
     }
 
     private List<Integer> createCopyOfList(List<Integer> list) {
-        return list.stream().collect(Collectors.toList());
+        List<Integer> copy = new ArrayList<>();
+        for (int num : list) {
+            copy.add(num);
+        }
+        return copy;
     }
 
     private int getIndexOfMaxInList(List<Integer> list) {
@@ -140,12 +149,9 @@ public class InfiniteHouseOfPancakes {
 
                         // Invoke algorithm here
                         List<Integer> pancakesOnPlates = houseOfPancakes.getListFromPString(pString);
-                        System.out.println(pString);
                         String solutionToTestCase = String.valueOf(houseOfPancakes.solution(d, pancakesOnPlates));
 
                         // Prepare output string
-                        System.out.println("Min :: " + solutionToTestCase);
-                        System.out.println("");
                         output.append("Case #").append(activeTestCaseNumber).append(": ").append(solutionToTestCase);
                         output.append("\n");
                     }
