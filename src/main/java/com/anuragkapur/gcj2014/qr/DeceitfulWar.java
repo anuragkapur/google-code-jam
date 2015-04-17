@@ -17,7 +17,7 @@ import java.util.Arrays;
  */
 
 public class DeceitfulWar {
-    private static String inputFileName = "gcj2014_qr_deceitfulwar_large.in";
+    private static String inputFileName = "gcj2014/qr/gcj2014_qr_deceitfulwar_large.in";
     private static String outputFileName = "src/main/resources/gcj2014_qr_deceitfulwar_large.out";
     private static ClassLoader classLoader;
 

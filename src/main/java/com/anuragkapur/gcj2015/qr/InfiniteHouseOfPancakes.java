@@ -19,7 +19,7 @@ import java.util.stream.Collectors;
 public class InfiniteHouseOfPancakes {
 
 
-    private static String inputFileName = "B-small-attempt1.in";
+    private static String inputFileName = "gcj2015/qr/B-small-attempt1.in";
     private static String outputFileName = "src/main/resources/B-small-attempt1.out";
     private static ClassLoader classLoader;
 

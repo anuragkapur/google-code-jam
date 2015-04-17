@@ -21,7 +21,7 @@ import java.util.Set;
 
 public class MagicTrick {
 
-    private static String inputFileName = "gcj2014_qr_magictrick.in";
+    private static String inputFileName = "gcj2014/qr/gcj2014_qr_magictrick.in";
     private static String outputFileName = "src/main/resources/gcj2014_qr_magictrick.out";
     private static ClassLoader classLoader;
 

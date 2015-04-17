@@ -15,7 +15,7 @@ import java.nio.file.Paths;
  */
 public class StandingOvation {
 
-    private static String inputFileName = "gcj2015_qr_standingovation_large.in";
+    private static String inputFileName = "gcj2015/qr/gcj2015_qr_standingovation_large.in";
     private static String outputFileName = "src/main/resources/gcj2015_qr_standingovation_large.out";
     private static ClassLoader classLoader;
 
