@@ -13,14 +13,14 @@ import java.nio.file.Paths;
 /**
  * @author anuragkapur
  */
-public class Problem1 {
+public class Problem4 {
 
     private static String inputFileName = "template.in";
     private static String outputFileName = "src/main/resources/template.out";
     private static ClassLoader classLoader;
 
     static {
-        classLoader = Problem1.class.getClassLoader();
+        classLoader = Problem4.class.getClassLoader();
     }
 
     private String compute() {
@@ -46,7 +46,7 @@ public class Problem1 {
             StringBuilder output = new StringBuilder();
 
             // Instantiate object to use non static methods
-            Problem1 problem1 = new Problem1();
+            Problem4 problem1 = new Problem4();
 
             // read and parse input file
             URL fileUrl = classLoader.getResource(inputFileName);
