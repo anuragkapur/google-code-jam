@@ -6,3 +6,7 @@ Google Code Jam 2015
 ##Qualification Round
 
 Source: [Qualification Round](qr/README.md)
+
+##Round 1a
+
+Source: [Round 1a](r1a/README.md)
