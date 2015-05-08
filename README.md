@@ -1,4 +1,4 @@
-GOOGLE CODE JAM - SOLUTIONS
+Google Code Jam - Solutions
 ===========================
 
 Programming Language
