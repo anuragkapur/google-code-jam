@@ -9,116 +9,96 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
 
 /**
+ * Solution for small input: Correct
+ *
  * @author anuragkapur
  */
 public class Haircut {
 
-    private static String inputFileName = "B-small-attempt1.in";
-    private static String outputFileName = "src/main/resources/B-small-attempt1.out";
+    private static String inputFileName = "gcj2015/r1a/B-small-practice.in";
+    private static String outputFileName = "src/main/resources/gcj2015/r1a/B-small-practice.out";
     private static ClassLoader classLoader;
-    private static Map<String, Integer> memoized = new HashMap<>();
 
     static {
         classLoader = Haircut.class.getClassLoader();
     }
 
     private int compute(String line1, String line2) {
-        //System.out.println(line1);
-        //System.out.println(line2);
+        // setup
         int b = Integer.parseInt(line1.split("\\s")[0]);
         int n = Integer.parseInt(line1.split("\\s")[1]);
 
         String tokens[] = line2.split("\\s");
         int barberTimes[] = new int[tokens.length];
-        boolean areAllEqual = true;
         for (int i=0; i<barberTimes.length; i++) {
             barberTimes[i] = Integer.parseInt(tokens[i]);
-            if (i > 0) {
-                if (barberTimes[i] != barberTimes[i-1]) {
-                    areAllEqual = false;
-                }
-            }
         }
 
-        // if all barber times are equal
-        if (areAllEqual) {
-            int mod = n % b;
-            //System.out.println("all equal");
-            return b - mod;
+        int lcm = getLcm(barberTimes);
+        int servedInLcmTime = 0;
+        for (int barberTime : barberTimes) {
+            servedInLcmTime += lcm / barberTime;
         }
 
-        int barbers[][] = new int[b][2];
-
-        int minTime = minDiff(barberTimes);
-        int maxTime = max(barberTimes);
-
-        // t=0;
-        int queueTracker = 0;
-        for (int i=0; i<b; i++) {
-            if(i+1 == n) {
-                return i+1;
-            }
-            barbers[i][0] = i;
-            barbers[i][1] = 0;
-            queueTracker = i+1;
+        int x = 1;
+        while (servedInLcmTime * x < n) {
+            x++;
         }
 
-        while(queueTracker < n) {
-
-            // update barber elapsed times with current customer
-            for (int i=0; i<b; i++) {
-                barbers[i][1] = barbers[i][1] + minTime;
-            }
-
-            // check if a barber is finishing with a customer
-            for (int i=0; i<b; i++) {
-                if (barbers[i][1] == barberTimes[i]) {
-                    queueTracker ++;
-                    barbers[i][0] = queueTracker;
-                    barbers[i][1] = 0;
-
-                    if (queueTracker == n) {
+        int numberServed = servedInLcmTime * (x - 1);
+        int minTime = getMin(barberTimes);
+        int timeElapsedForBarbers[] = new int[barberTimes.length];
+        while (numberServed < n) {
+            for (int i = 0; i < barberTimes.length; i++) {
+                if (timeElapsedForBarbers[i] == 0) {
+                    numberServed ++;
+                    if (numberServed == n) {
+                        return i+1;
+                    }
+                } else if (timeElapsedForBarbers[i] == barberTimes[i]) {
+                    timeElapsedForBarbers[i] = 0;
+                    numberServed ++;
+                    if (numberServed == n) {
                         return i+1;
                     }
                 }
+                timeElapsedForBarbers[i] += minTime;
             }
         }
 
         return -1;
     }
 
-    private int max(int a[]) {
-        int max = a[0];
-        for (int i=1; i<a.length; i++) {
-            if (a[i] > max) {
-                max = a[i];
+    private int getMin(int[] barberTimes) {
+        return 1;
+    }
+
+    private int getMax(int [] barberTimes) {
+        int max = barberTimes[0];
+        for (int barberTime : barberTimes) {
+            if (barberTime > max) {
+                max = barberTime;
             }
         }
         return max;
     }
 
-    private int minDiff(int a[]) {
-        int b[] = Arrays.copyOf(a, a.length);
-        Arrays.sort(b);
-
-        if (b.length == 2) {
-            return b[1] - b[0];
-        }
-
-        int minDif = b[1] - b[0];
-        for (int i=2; i<b.length; i++) {
-            int localMinDif = b[i] - b[i-1];
-            if (localMinDif < minDif) {
-                minDif = localMinDif;
+    private int getLcm(int[] barberTimes) {
+        int max = getMax(barberTimes);
+        while (true) {
+            boolean lcm = true;
+            for (int barberTime : barberTimes) {
+                if (max % barberTime != 0) {
+                    lcm = false;
+                }
             }
+            if (lcm) {
+                return max;
+            }
+            max ++;
         }
-
-        return minDif;
     }
 
     private static void writeOutputToFile(String str) {
@@ -156,9 +136,6 @@ public class Haircut {
             int activeTestCaseNumber = 0;
             String line1 = null;
             while ((strLine = reader.readLine()) != null) {
-
-                //System.out.println(strLine);
-
                 if (lineNumber == 0) {
                     noOfTestCases = Integer.parseInt(strLine);
                 } else {
