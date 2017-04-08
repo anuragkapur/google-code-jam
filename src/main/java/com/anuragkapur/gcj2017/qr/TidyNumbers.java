@@ -4,6 +4,7 @@ import com.sun.tools.javac.util.Assert;
 
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.math.BigInteger;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
@@ -15,8 +16,8 @@ import java.nio.file.Paths;
  */
 public class TidyNumbers {
 
-    private static String inputFileName = "gcj2017/qr/B-small-attempt0.in";
-    private static String outputFileName = "src/main/resources/gcj2017/qr/B-small-attempt0.out";
+    private static String inputFileName = "template.in";
+    private static String outputFileName = "src/main/resources/template.out";
     private static ClassLoader classLoader;
 
     static {
@@ -32,18 +33,41 @@ public class TidyNumbers {
         }
     }
 
-    private static int findLargestTidy(int n) {
+    private static String findLargestTidy(String num) {
 
-        for (int i=n; i>=0; i--) {
-            if (isTidy(i))
-                return i;
+        if (isTidy(num))
+            return num;
+
+        String[] digits = num.split("");
+
+        for (int i = digits.length-1; i > 0; i--) {
+
+            int r = Integer.parseInt(digits[i]);
+            int l = Integer.parseInt(digits[i-1]);
+
+            if (l > r) {
+                l = l - 1;
+                r = 9;
+                digits[i] = String.valueOf(r);
+                digits[i-1] = String.valueOf(l);
+
+                for (int j = i+1; j < digits.length; j++) {
+                    digits[j] = String.valueOf(9);
+                }
+            }
         }
 
-        return -1;
+        StringBuilder builder = new StringBuilder();
+        for (String digit : digits) {
+            builder.append(digit);
+        }
+        if (builder.charAt(0) == '0') {
+            builder.deleteCharAt(0);
+        }
+        return builder.toString();
     }
 
-    private static boolean isTidy(int n) {
-        String num = Integer.toString(n);
+    private static boolean isTidy(String num) {
         String[] digits = num.split("");
         boolean tidy = true;
         for (int i = 0; i < digits.length-1; i++) {
@@ -92,7 +116,7 @@ public class TidyNumbers {
                     // this test case
 
                     // Invoke algorithm here
-                    String solutionToTestCase = Integer.toString(findLargestTidy(Integer.parseInt(strLine)));
+                    String solutionToTestCase = findLargestTidy(strLine);
 
                     // Prepare output string
                     System.out.println(solutionToTestCase);
