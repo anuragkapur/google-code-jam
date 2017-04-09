@@ -10,7 +10,6 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Collections;
-import java.util.LinkedList;
 import java.util.PriorityQueue;
 import java.util.Queue;
 
@@ -19,8 +18,8 @@ import java.util.Queue;
  */
 public class BathroomStalls {
 
-    private static String inputFileName = "gcj2017/qr/C-small-1-attempt3.in";
-    private static String outputFileName = "src/main/resources/gcj2017/qr/C-small-1.out";
+    private static String inputFileName = "gcj2017/qr/C-small-2-attempt0.in";
+    private static String outputFileName = "src/main/resources/gcj2017/qr/C-small-2.out";
     private static ClassLoader classLoader;
 
     static {
