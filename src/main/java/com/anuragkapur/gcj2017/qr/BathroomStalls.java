@@ -9,7 +9,9 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Collections;
 import java.util.LinkedList;
+import java.util.PriorityQueue;
 import java.util.Queue;
 
 /**
@@ -17,8 +19,8 @@ import java.util.Queue;
  */
 public class BathroomStalls {
 
-    private static String inputFileName = "template.in";
-    private static String outputFileName = "src/main/resources/template.out";
+    private static String inputFileName = "gcj2017/qr/C-small-1-attempt3.in";
+    private static String outputFileName = "src/main/resources/gcj2017/qr/C-small-1.out";
     private static ClassLoader classLoader;
 
     static {
@@ -36,13 +38,13 @@ public class BathroomStalls {
 
     private static String compute(int n, int k) throws Exception {
 
-        Queue<Integer> queue = new LinkedList<>();
-        queue.add(n);
+        Queue<Integer> queue = new PriorityQueue<>(Collections.reverseOrder());
+        queue.offer(n);
         int count = 0;
 
         while (!queue.isEmpty()) {
             count ++;
-            int head = queue.remove();
+            int head = queue.poll();
             int l, r;
 
             if (head % 2 == 0) {
@@ -56,8 +58,8 @@ public class BathroomStalls {
             if (count == k) {
                 return Math.max(l, r) + " " + Math.min(l, r);
             } else {
-                if (r > 0) queue.add(r);
-                if (l > 0) queue.add(l);
+                if (r > 0) queue.offer(r);
+                if (l > 0) queue.offer(l);
             }
         }
 
